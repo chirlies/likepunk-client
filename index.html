@@ -1,24 +1,99 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LikePunk | Fast Social Boost</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>LikePunk</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    select, input, button {
+      margin: 0.5rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    #response {
+      margin-top: 1rem;
+      color: #0f0;
+    }
+  </style>
 </head>
-<body class="bg-black text-white flex items-center justify-center min-h-screen">
-  <div class="text-center space-y-6">
-    <h1 class="text-4xl font-bold">🔥 LikePunk</h1>
-    <p class="text-lg text-gray-300">Buy followers, likes & views. Fast. Cheap. Anonymous.</p>
-    <form class="space-y-4">
-      <input type="text" placeholder="Username or link" class="px-4 py-2 w-80 rounded bg-gray-900 border border-gray-600 text-white" required />
-      <select class="px-4 py-2 w-80 rounded bg-gray-900 border border-gray-600 text-white">
-        <option value="instagram_followers">Instagram Followers</option>
-        <option value="tiktok_views">TikTok Views</option>
-        <option value="youtube_likes">YouTube Likes</option>
-      </select>
-      <button type="submit" class="bg-white text-black px-6 py-2 rounded hover:bg-gray-200">Order Now</button>
-    </form>
-  </div>
+<body>
+  <h1>🔥 LikePunk</h1>
+  <p>Buy followers, likes & views. Fast. Cheap. Anonymous.</p>
+
+  <input type="text" id="link" placeholder="Username or link" />
+  <select id="productSelect">
+    <option value="">Loading...</option>
+  </select>
+  <input type="number" id="quantity" placeholder="Quantity" min="1" />
+  <button onclick="orderNow()">Order Now</button>
+
+  <div id="response"></div>
+
+  <script>
+    const select = document.getElementById("productSelect");
+    const responseDiv = document.getElementById("response");
+
+    fetch("https://likepunk-backend-production.up.railway.app/products")
+      .then(res => res.json())
+      .then(data => {
+        select.innerHTML = "";
+        data.forEach(service => {
+          const option = document.createElement("option");
+          option.value = service.service;
+          option.textContent = `${service.name} | $${parseFloat(service.rate).toFixed(4)} per 1k`;
+          select.appendChild(option);
+        });
+      })
+      .catch(err => {
+        select.innerHTML = "<option>Error loading services</option>";
+      });
+
+    function orderNow() {
+      const link = document.getElementById("link").value;
+      const service = select.value;
+      const quantity = document.getElementById("quantity").value;
+
+      if (!link || !service || !quantity) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      fetch("https://likepunk-backend-production.up.railway.app/create-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: 1.00, // Temporary fixed price for demo
+          currency: "usd",
+          order_id: `likepunk-${Date.now()}`
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.invoice_url) {
+          window.open(data.invoice_url, "_blank");
+        } else {
+          responseDiv.textContent = "Error creating payment.";
+        }
+      })
+      .catch(err => {
+        responseDiv.textContent = "Failed to send request.";
+      });
+    }
+  </script>
 </body>
 </html>
