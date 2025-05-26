@@ -79,7 +79,7 @@
         body: JSON.stringify({
           amount: 1.00, // Temporary fixed price for demo
           currency: "usd",
-          order_id: `likepunk-${Date.now()}`
+          order_id: `likepunk|${Date.now()}|${service}|${link}|${quantity}`
         })
       })
       .then(res => res.json())
