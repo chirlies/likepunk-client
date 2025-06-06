@@ -1,4 +1,4 @@
-<!-- v1.2 -->
+<!-- v1.3 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +48,7 @@
     const select = document.getElementById("productSelect");
     const responseDiv = document.getElementById("response");
 
+    // Загружаем продукты с ценой
     fetch("https://likepunk-backend-production.up.railway.app/products")
       .then(res => res.json())
       .then(data => {
@@ -55,6 +56,7 @@
         data.forEach(service => {
           const option = document.createElement("option");
           option.value = service.service;
+          option.dataset.rate = service.rate; // добавляем цену
           option.textContent = `${service.name} | $${parseFloat(service.rate).toFixed(4)} per 1k`;
           select.appendChild(option);
         });
@@ -64,36 +66,43 @@
       });
 
     function orderNow() {
-      const link = document.getElementById("link").value;
-      const service = select.value;
-      const quantity = document.getElementById("quantity").value;
+      const link = document.getElementById("link").value.trim();
+      const quantity = parseInt(document.getElementById("quantity").value);
+      const selectedOption = select.options[select.selectedIndex];
 
-      if (!link || !service || !quantity) {
-        alert("Please fill in all fields.");
-        return;
+      const service = selectedOption?.value;
+      const ratePer1k = parseFloat(selectedOption?.dataset?.rate || "0");
+
+      if (!link || !service || !quantity || !ratePer1k) {
+      alert("Please fill in all fields.");
+      return;
       }
 
+      const amount = (ratePer1k / 1000) * quantity;
+
       fetch("https://likepunk-backend-production.up.railway.app/create-payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: 1.00, // Temporary fixed price for demo
-          currency: "usd",
-          order_id: `likepunk|${Date.now()}|${service}|${link}|${quantity}`
-        })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+      amount: parseFloat(amount.toFixed(4)),
+      currency: "usd",
+      order_id: `likepunk|${Date.now()}|${service}|${link}|${quantity}`
+      })
       })
       .then(res => res.json())
       .then(data => {
-        if (data.invoice_url) {
-          window.open(data.invoice_url, "_blank");
-        } else {
-          responseDiv.textContent = "Error creating payment.";
-        }
+      if (data.invoice_url) {
+      // 🔄 Заменили поведение — теперь открывает в этом же окне:
+      window.location.href = data.invoice_url;
+      } else {
+      responseDiv.textContent = "Error creating payment.";
+      }
       })
-      .catch(err => {
-        responseDiv.textContent = "Failed to send request.";
-      });
-    }
+    .catch(err => {
+    responseDiv.textContent = "Failed to send request.";
+  });
+  }
+
   </script>
 </body>
 </html>
