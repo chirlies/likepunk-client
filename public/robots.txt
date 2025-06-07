@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://likepunk.com/public/sitemap.xml
+Sitemap: https://likepunk.com/sitemap.xml
