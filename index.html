@@ -33,13 +33,13 @@
     <section id="order" class="order">
       <h2>Place Your Order</h2>
       <div class="order-form">
-        <input type="text" id="link" placeholder="Username or link" />
-        <select id="productSelect" size="6">
+        <input type="text" id="link" placeholder="Username or link" class="input-field" />
+        <select id="productSelect" size="6" class="select-box">
           <option value="">Loading services...</option>
         </select>
         <div id="servicePrice"></div>
-        <input type="number" id="quantity" placeholder="Quantity" min="1" />
-        <button onclick="orderNow()">Order Now</button>
+        <input type="number" id="quantity" placeholder="Quantity" min="1" class="input-field" />
+        <button onclick="orderNow()" class="submit-button">Order Now</button>
         <div id="response"></div>
       </div>
     </section>
