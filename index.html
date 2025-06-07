@@ -4,154 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LikePunk</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="/favicon.ico">
+
+  <!-- Basic Meta -->
+  <meta name="description" content="Buy followers, likes & views instantly. Anonymous & cheap SMM panel. Pay in crypto.">
+  <meta name="keywords" content="buy followers, tiktok boost, smm panel, crypto payment, views, instagram, likepunk">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://likepunk.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="LikePunk — Boost Your Socials Instantly">
+  <meta property="og:description" content="Buy real followers, likes, views. Anonymous & fast. No bullshit.">
+  <meta property="og:url" content="https://likepunk.com/">
+  <meta property="og:image" content="https://likepunk.com/public/logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LikePunk — Boost Your Socials Instantly">
+  <meta name="twitter:description" content="Buy followers, views & likes. Fast. Cheap. Anonymous.">
+  <meta name="twitter:image" content="https://likepunk.com/public/logo.png">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
+
+  <!-- OpenGraph / Twitter preview image -->
+  <!-- уже подключено:
+  <meta property="og:image" content="https://likepunk.com/public/logo.png">
+  <meta name="twitter:image" content="https://likepunk.com/public/logo.png">
+  -->
 </head>
-<body class="bg-black text-white font-sans">
-  <!-- Hero Section -->
-  <section class="w-full min-h-screen flex flex-col justify-center items-center text-center px-4 bg-gradient-to-br from-black via-gray-900 to-black">
-    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">
-      Grow Your Socials Fast, Cheap, Anonymous
-    </h1>
-    <p class="text-lg md:text-xl max-w-xl mb-6 text-gray-300">
-      Buy followers, views & likes for TikTok, Instagram and more. Transparent pricing. Instant delivery. No bullshit.
-    </p>
-    <a href="#order" class="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition">
-      Get Started
-    </a>
+<body>
+  <section class="hero">
+    <h1>Grow Your Socials Fast, Cheap, Anonymous</h1>
+    <p>Buy followers, views & likes for TikTok, Instagram and more. Transparent pricing. Instant delivery. No bullshit.</p>
+    <a href="#order" class="cta-button">Get Started</a>
   </section>
 
-  <!-- Features Section -->
-  <section class="bg-gray-900 py-16 px-4">
-    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-      <div>
-        <h3 class="text-xl font-semibold mb-2">Real Speed</h3>
-        <p class="text-gray-400">Orders processed within seconds and completed in minutes.</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-semibold mb-2">Anonymous</h3>
-        <p class="text-gray-400">No registration. Pay in crypto. No one knows.</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-semibold mb-2">Lowest Prices</h3>
-        <p class="text-gray-400">Direct from top-tier SMM providers. Zero markup.</p>
-      </div>
+  <section class="features">
+    <div class="feature">
+      <h3>Real Speed</h3>
+      <p>Orders processed within seconds and completed in minutes.</p>
+    </div>
+    <div class="feature">
+      <h3>Anonymous</h3>
+      <p>No registration. Pay in crypto. No one knows.</p>
+    </div>
+    <div class="feature">
+      <h3>Lowest Prices</h3>
+      <p>Direct from top-tier SMM providers. Zero markup.</p>
     </div>
   </section>
 
-  <!-- Order Section -->
-  <section id="order" class="bg-black py-16 px-4">
-    <div class="max-w-xl mx-auto text-center">
-      <h2 class="text-2xl font-semibold mb-4">Place Your Order</h2>
-
-      <input type="text" id="link" placeholder="Username or link" class="w-full mb-4 px-4 py-2 rounded text-black" />
-
-      <div class="relative mb-4">
-        <select id="productSelect" size="6" class="w-full px-4 py-2 rounded text-black overflow-y-auto h-48">
-          <option value="">Loading services...</option>
-        </select>
-      </div>
-
-      <div id="servicePrice" class="text-sm text-gray-400 mb-4"></div>
-      <input type="number" id="quantity" placeholder="Quantity" min="1" class="w-full mb-4 px-4 py-2 rounded text-black" />
-
-      <button onclick="orderNow()" class="px-6 py-2 bg-white text-black rounded hover:bg-gray-200">Order Now</button>
-      <div id="response" class="mt-4 text-green-400"></div>
-    </div>
+  <section id="order" class="order">
+    <h2>Place Your Order</h2>
+    <input type="text" id="link" placeholder="Username or link">
+    <select id="productSelect" size="6">
+      <option value="">Loading services...</option>
+    </select>
+    <div id="servicePrice"></div>
+    <input type="number" id="quantity" placeholder="Quantity" min="1">
+    <button onclick="orderNow()">Order Now</button>
+    <div id="response"></div>
   </section>
 
-  <script>
-    const select = document.getElementById("productSelect");
-    const responseDiv = document.getElementById("response");
-    const priceDiv = document.getElementById("servicePrice");
-
-    function cleanName(name) {
-      return name.replace(/[^\w\s\-]+/g, '').replace(/\s+/g, ' ').trim();
-    }
-
-    const groups = {};
-
-    fetch("https://likepunk-backend-production.up.railway.app/products")
-      .then(res => res.json())
-      .then(data => {
-        select.innerHTML = "";
-        data.forEach(service => {
-          const cleaned = cleanName(service.name);
-          const [platform] = cleaned.split(" - ");
-          if (!groups[platform]) {
-            groups[platform] = [];
-          }
-          groups[platform].push({
-            id: service.service,
-            name: cleaned,
-            rate: service.rate
-          });
-        });
-
-        Object.entries(groups).forEach(([platform, services]) => {
-          const optgroup = document.createElement("optgroup");
-          optgroup.label = platform;
-
-          services.forEach(service => {
-            const option = document.createElement("option");
-            option.value = service.id;
-            option.dataset.rate = service.rate;
-            option.textContent = `${service.name}`;
-            optgroup.appendChild(option);
-          });
-
-          select.appendChild(optgroup);
-        });
-      })
-      .catch(err => {
-        select.innerHTML = "<option>Error loading services</option>";
-      });
-
-    select.addEventListener("change", () => {
-      const selected = select.options[select.selectedIndex];
-      if (selected && selected.dataset.rate) {
-        const rate = parseFloat(selected.dataset.rate);
-        priceDiv.textContent = `Price: $${rate.toFixed(4)} per 1k`;
-      } else {
-        priceDiv.textContent = "";
-      }
-    });
-
-    function orderNow() {
-      const link = document.getElementById("link").value.trim();
-      const quantity = parseInt(document.getElementById("quantity").value);
-      const selectedOption = select.options[select.selectedIndex];
-
-      const service = selectedOption?.value;
-      const ratePer1k = parseFloat(selectedOption?.dataset?.rate || "0");
-
-      if (!link || !service || !quantity || !ratePer1k) {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      const amount = (ratePer1k / 1000) * quantity;
-
-      fetch("https://likepunk-backend-production.up.railway.app/create-payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: parseFloat(amount.toFixed(4)),
-          currency: "usd",
-          order_id: `likepunk|${Date.now()}|${service}|${link}|${quantity}`
-        })
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.invoice_url) {
-            window.location.href = data.invoice_url;
-          } else {
-            responseDiv.textContent = "Error creating payment.";
-          }
-        })
-        .catch(err => {
-          responseDiv.textContent = "Failed to send request.";
-        });
-    }
-  </script>
+  <script src="./js/script.js"></script>
 </body>
 </html>
