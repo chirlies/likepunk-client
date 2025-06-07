@@ -4,69 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LikePunk</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="icon" type="image/png" href="/favicon.ico">
-
-  <!-- Basic Meta -->
-  <meta name="description" content="Buy followers, likes & views instantly. Anonymous & cheap SMM panel. Pay in crypto.">
-  <meta name="keywords" content="buy followers, tiktok boost, smm panel, crypto payment, views, instagram, likepunk">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://likepunk.com/">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="LikePunk — Boost Your Socials Instantly">
-  <meta property="og:description" content="Buy real followers, likes, views. Anonymous & fast. No bullshit.">
-  <meta property="og:url" content="https://likepunk.com/">
-  <meta property="og:image" content="https://likepunk.com/public/logo.png">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LikePunk — Boost Your Socials Instantly">
-  <meta name="twitter:description" content="Buy followers, views & likes. Fast. Cheap. Anonymous.">
-  <meta name="twitter:image" content="https://likepunk.com/public/logo.png">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
-
-  <!-- OpenGraph / Twitter preview image -->
-  <!-- уже подключено:
-  <meta property="og:image" content="https://likepunk.com/public/logo.png">
-  <meta name="twitter:image" content="https://likepunk.com/public/logo.png">
-  -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="icon" href="./public/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-  <section class="hero">
+  <header>
     <h1>Grow Your Socials Fast, Cheap, Anonymous</h1>
     <p>Buy followers, views & likes for TikTok, Instagram and more. Transparent pricing. Instant delivery. No bullshit.</p>
     <a href="#order" class="cta-button">Get Started</a>
-  </section>
+  </header>
 
-  <section class="features">
-    <div class="feature">
-      <h3>Real Speed</h3>
-      <p>Orders processed within seconds and completed in minutes.</p>
-    </div>
-    <div class="feature">
-      <h3>Anonymous</h3>
-      <p>No registration. Pay in crypto. No one knows.</p>
-    </div>
-    <div class="feature">
-      <h3>Lowest Prices</h3>
-      <p>Direct from top-tier SMM providers. Zero markup.</p>
-    </div>
-  </section>
+  <main>
+    <section class="features">
+      <div class="feature">
+        <h3>Real Speed</h3>
+        <p>Orders processed within seconds and completed in minutes.</p>
+      </div>
+      <div class="feature">
+        <h3>Anonymous</h3>
+        <p>No registration. Pay in crypto. No one knows.</p>
+      </div>
+      <div class="feature">
+        <h3>Lowest Prices</h3>
+        <p>Direct from top-tier SMM providers. Zero markup.</p>
+      </div>
+    </section>
 
-  <section id="order" class="order">
-    <h2>Place Your Order</h2>
-    <input type="text" id="link" placeholder="Username or link">
-    <select id="productSelect" size="6">
-      <option value="">Loading services...</option>
-    </select>
-    <div id="servicePrice"></div>
-    <input type="number" id="quantity" placeholder="Quantity" min="1">
-    <button onclick="orderNow()">Order Now</button>
-    <div id="response"></div>
-  </section>
+    <section id="order" class="order">
+      <h2>Place Your Order</h2>
+      <div class="order-form">
+        <input type="text" id="link" placeholder="Username or link" />
+        <select id="productSelect" size="6">
+          <option value="">Loading services...</option>
+        </select>
+        <div id="servicePrice"></div>
+        <input type="number" id="quantity" placeholder="Quantity" min="1" />
+        <button onclick="orderNow()">Order Now</button>
+        <div id="response"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 LikePunk. All rights reserved.</p>
+  </footer>
 
   <script src="./js/script.js"></script>
 </body>
