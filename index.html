@@ -4,51 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LikePunk</title>
-  <link rel="stylesheet" href="./css/style.css" />
-  <link rel="icon" href="./public/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Grow Your Socials Fast, Cheap, Anonymous</h1>
-    <p>Buy followers, views & likes for TikTok, Instagram and more. Transparent pricing. Instant delivery. No bullshit.</p>
+    <p>
+      Buy followers, views & likes for TikTok, Instagram and more.
+      Transparent pricing. Instant delivery. No bullshit.
+    </p>
     <a href="#order" class="cta-button">Get Started</a>
   </header>
 
-  <main>
-    <section class="features">
-      <div class="feature">
-        <h3>Real Speed</h3>
-        <p>Orders processed within seconds and completed in minutes.</p>
-      </div>
-      <div class="feature">
-        <h3>Anonymous</h3>
-        <p>No registration. Pay in crypto. No one knows.</p>
-      </div>
-      <div class="feature">
-        <h3>Lowest Prices</h3>
-        <p>Direct from top-tier SMM providers. Zero markup.</p>
-      </div>
-    </section>
+  <section class="features">
+    <div class="feature">
+      <h3>Real Speed</h3>
+      <p>Orders processed within seconds and completed in minutes.</p>
+    </div>
+    <div class="feature">
+      <h3>Anonymous</h3>
+      <p>No registration. Pay in crypto. No one knows.</p>
+    </div>
+    <div class="feature">
+      <h3>Lowest Prices</h3>
+      <p>Direct from top-tier SMM providers. Zero markup.</p>
+    </div>
+  </section>
 
-    <section id="order" class="order">
+  <section class="order-section" id="order">
+    <div class="order-wrapper">
       <h2>Place Your Order</h2>
-      <div class="order-form">
-        <input type="text" id="link" placeholder="Username or link" class="input-field" />
-        <select id="productSelect" size="6" class="select-box">
-          <option value="">Loading services...</option>
+      <form>
+        <input type="text" placeholder="Username or link" required />
+        <select required>
+          <option value="" disabled selected>Select Service</option>
+          <option>Video Views [ SP Server 1 ]</option>
+          <option>Shares</option>
+          <option>Post Views</option>
+          <option>Likes [ SP Server 1 ]</option>
         </select>
-        <div id="servicePrice"></div>
-        <input type="number" id="quantity" placeholder="Quantity" min="1" class="input-field" />
-        <button onclick="orderNow()" class="submit-button">Order Now</button>
-        <div id="response"></div>
-      </div>
-    </section>
-  </main>
+        <input type="number" placeholder="Quantity" required />
+        <button type="submit">Order Now</button>
+      </form>
+    </div>
+  </section>
 
   <footer>
     <p>&copy; 2025 LikePunk. All rights reserved.</p>
   </footer>
-
-  <script src="./js/script.js"></script>
 </body>
 </html>

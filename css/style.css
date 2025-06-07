@@ -1,75 +1,118 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
-  background-color: #000;
+  background-color: #0a0a0a;
   color: #fff;
-  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 20px;
 }
 
-section {
-  padding: 4rem 1rem;
+header {
+  text-align: center;
+  padding: 50px 20px 30px;
 }
 
-h1, h2, h3 {
+header h1 {
+  font-size: 2.5rem;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
-input, select, button {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
+header p {
+  max-width: 700px;
+  margin: 0 auto 20px;
   font-size: 1rem;
-  border-radius: 0.375rem;
 }
 
-button {
-  background-color: white;
-  color: black;
-  cursor: pointer;
-  transition: background-color 0.2s;
+.cta-button {
+  display: inline-block;
+  background-color: #00ffe0;
+  color: #000;
+  padding: 12px 28px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #ccc;
+.cta-button:hover {
+  background-color: #00ccb0;
 }
 
-#response {
-  margin-top: 1rem;
-  color: #0f0;
-}
-
-select {
-  overflow-y: auto;
-  max-height: 12rem;
-}
-
-#servicePrice {
-  font-size: 0.875rem;
-  color: #ccc;
-}
-
-.hero {
+.features-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, #000, #111, #000);
+  gap: 20px;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.features {
+.feature {
+  background-color: #1a1a1a;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 1 250px;
+  min-width: 260px;
+  max-width: 300px;
+}
+
+.order-section {
   background-color: #111;
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  padding: 60px 20px;
+  margin-top: 40px;
   text-align: center;
 }
 
-.features div {
-  color: #aaa;
-}
-
-.order {
-  background-color: #000;
-  text-align: center;
+.order-wrapper {
+  background-color: #1c1c1c;
+  padding: 30px;
+  border-radius: 10px;
   max-width: 600px;
   margin: 0 auto;
+}
+
+.order-wrapper h2 {
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.order-wrapper input,
+.order-wrapper select,
+.order-wrapper button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+.order-wrapper button {
+  background-color: #00ffe0;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-wrapper button:hover {
+  background-color: #00ccb0;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 60px;
 }
